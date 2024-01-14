@@ -1,16 +1,17 @@
-import {Game} from './ui/game/game.component.js'
-import {subscribe} from './data/game.data.js'
-import {Player} from './sound/player.js'
+import { Game } from './ui/game/game.component.js'
+import { subscribe } from './data/game.data.js'
+import { Player } from './sound/player.js'
 
 Player();
 
 //subscribe(renderApp);
 
-function renderApp() {
-  document.body.innerHTML = "";
+const wrapperElement = document.getElementById('wrapper');
+const gameElement = Game();
 
-  const gameEl = Game();
-  document.body.append(gameEl);
+function renderApp() {
+	wrapperElement.innerHTML = "";
+	wrapperElement.append(gameElement);
 }
 
 renderApp();

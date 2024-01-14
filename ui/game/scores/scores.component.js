@@ -1,4 +1,5 @@
 import { data, subscribe } from "../../../data/game.data.js";
+
 export function Scores() {
 
 	subscribe(() => {
@@ -7,11 +8,22 @@ export function Scores() {
 	})
 
 	const containerElement = document.createElement('div');
+	containerElement.classList.add('scores');
 	update(containerElement);
 
 	return containerElement;
 }
 
 function update(containerElement) {
-	containerElement.append('catch: ' + data.score.caughtCount + '; miss: ' + data.score.missCount);
+	const leftBoxScores = document.createElement('div');
+	const spanLeftBoxScores = document.createElement('span');
+	spanLeftBoxScores.append(data.score.caughtCount);
+	leftBoxScores.append('catch:', spanLeftBoxScores);
+
+	const rightBoxScores = document.createElement('div');
+	const spanRightBoxScores = document.createElement('span');
+	spanRightBoxScores.append(data.score.missCount);
+	rightBoxScores.append('miss:', spanRightBoxScores);
+
+	containerElement.append(leftBoxScores, rightBoxScores);
 }

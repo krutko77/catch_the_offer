@@ -40,7 +40,7 @@ function notify() {
 
 export function subscribe(newSubscriber) {
 	subscribers.push(newSubscriber);
-	console.log(subscribers.length)
+	/* console.log(subscribers.length) */
 }
 
 let stepIntervalId;

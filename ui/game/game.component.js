@@ -4,6 +4,7 @@ import { Grid } from './grid/grid.component.js'
 
 export function Game() {
 	const containerElement = document.createElement('div');
+	containerElement.classList.add('container');
 
 	const settingsElement = Settings();
 	containerElement.append(settingsElement);
@@ -16,3 +17,7 @@ export function Game() {
 
 	return containerElement;
 }
+
+
+
+
