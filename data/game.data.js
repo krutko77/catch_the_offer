@@ -4,12 +4,14 @@ export const OFFER_STATUSES = {
 	caught: 'caught'
 }
 
+let selectRowsCount = 3;
+let selectColumnsCount = 3;
 
 export const data = {
 	// array for cells: cell = {x,y}
 	settings: {
-		rowsCount: 5,
-		columnsCount: 4,
+		rowsCount: selectRowsCount,
+		columnsCount: selectColumnsCount,
 		pointsToWin: 10,
 		maximumMisses: 3,
 		decreaseDeltaInMs: 100,
@@ -42,6 +44,20 @@ export function subscribe(newSubscriber) {
 	subscribers.push(newSubscriber);
 	/* console.log(subscribers.length) */
 }
+
+/* const selectElement = document.getElementById('gridSize');
+console.log(selectElement)
+
+selectElement.addEventListener("change", function () {
+
+	data.selectRowsCount = selectElement.value;
+	data.selectColumnsCount = selectElement.value;
+
+	console.log(selectRowsCount)
+	console.log(selectColumnsCount)
+}); */
+
+
 
 let stepIntervalId;
 
