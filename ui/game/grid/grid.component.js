@@ -1,5 +1,6 @@
 import { data } from "../../../data/game.data.js";
-import { Cell } from "./cell/cell.component.js"
+import { Cell } from "./cell/cell.component.js";
+
 export function Grid() {
 	const containerElement = document.createElement('table');
 

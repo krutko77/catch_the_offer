@@ -4,12 +4,13 @@ import { Player } from './sound/player.js'
 
 Player();
 
-//subscribe(renderApp);
+// subscribe(renderApp);
 
 const wrapperElement = document.getElementById('wrapper');
-const gameElement = Game();
+
 
 function renderApp() {
+	const gameElement = Game();
 	wrapperElement.innerHTML = "";
 	wrapperElement.append(gameElement);
 }

@@ -45,18 +45,18 @@ export function subscribe(newSubscriber) {
 	/* console.log(subscribers.length) */
 }
 
-/* const selectElement = document.getElementById('gridSize');
-console.log(selectElement)
+document.addEventListener('DOMContentLoaded', () => {
+	const selectElement = document.getElementById('gridSize');
 
-selectElement.addEventListener("change", function () {
+	selectElement.addEventListener("change", function () {
 
-	data.selectRowsCount = selectElement.value;
-	data.selectColumnsCount = selectElement.value;
+		data.rowsCount = Number(selectElement.value);
+		data.columnsCount = Number(selectElement.value);
 
-	console.log(selectRowsCount)
-	console.log(selectColumnsCount)
-}); */
+		notify()
+	});
 
+})
 
 
 let stepIntervalId;
