@@ -6,8 +6,12 @@ export function Grid() {
 
 	for (let y = 0; y < data.settings.rowsCount; y++) {
 		const row = document.createElement('tr');
+		console.log(data.settings.rowsCount)
 
 		for (let x = 0; x < data.settings.columnsCount; x++) {
+
+			console.log(data.settings.columnsCount)
+
 			const cell = Cell(x, y);
 			row.append(cell);
 		}

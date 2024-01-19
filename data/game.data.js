@@ -4,15 +4,12 @@ export const OFFER_STATUSES = {
 	caught: 'caught'
 }
 
-let selectRowsCount = 3;
-let selectColumnsCount = 3;
-
 export const data = {
 	// array for cells: cell = {x,y}
 	settings: {
-		rowsCount: selectRowsCount,
-		columnsCount: selectColumnsCount,
-		pointsToWin: 10,
+		rowsCount: 3,
+		columnsCount: 3,
+		pointsToWin: 20,
 		maximumMisses: 3,
 		decreaseDeltaInMs: 100,
 		isMuted: true
@@ -29,15 +26,15 @@ export const data = {
 		}
 	},
 	score: {
-		missCount: 3,
-		caughtCount: 2
+		missCount: 0,
+		caughtCount: 0
 	}
 }
 
 let subscribers = []
 
 function notify() {
-	subscribers.forEach(subscriber => subscriber())
+	subscribers.forEach(subscriber => subscriber());
 }
 
 export function subscribe(newSubscriber) {
@@ -45,18 +42,33 @@ export function subscribe(newSubscriber) {
 	/* console.log(subscribers.length) */
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-	const selectElement = document.getElementById('gridSize');
+// изменение данных через настройки
+export function gridDimensions(selectGridElement) {
+	data.settings.rowsCount = Number(selectGridElement.value);
+	data.settings.columnsCount = Number(selectGridElement.value);
+}
 
-	selectElement.addEventListener("change", function () {
+export function pointsToWin(selectPointsElement) {
+	data.settings.pointsToWin = Number(selectPointsElement.value);
 
-		data.rowsCount = Number(selectElement.value);
-		data.columnsCount = Number(selectElement.value);
+	console.log("win", data.settings.pointsToWin)
+}
 
-		notify()
-	});
+export function decreaseDeltaInMs(selectMsAfterElement) {
+	data.settings.decreaseDeltaInMs = Number(selectMsAfterElement.value);
 
-})
+	console.log("ms", data.settings.decreaseDeltaInMs)
+}
+
+export function maximumMisses(selectMaxMissesElement) {
+	data.settings.maximumMisses = Number(selectMaxMissesElement.value);
+
+	console.log("maxMiss", data.settings.maximumMisses)
+}
+
+
+
+
 
 
 let stepIntervalId;

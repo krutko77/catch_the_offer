@@ -1,4 +1,4 @@
-export function Switch(data) {
+export function Switch(settingsData) {
 	const container = document.createElement('label');
 	container.classList.add('checkbox');
 	container.htmlFor = 'checkbox';
@@ -6,7 +6,7 @@ export function Switch(data) {
 	const inputSwitchSettingElement = document.createElement('input');
 	inputSwitchSettingElement.classList.add('checkbox-input');
 	inputSwitchSettingElement.type = 'checkbox';
-	inputSwitchSettingElement.id = data.checkboxId;
+	inputSwitchSettingElement.id = settingsData.checkboxId;
 	const spanSwitchSettingElement = document.createElement('span');
 	spanSwitchSettingElement.classList.add('checkbox-inner');
 

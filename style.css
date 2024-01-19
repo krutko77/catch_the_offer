@@ -113,6 +113,7 @@ select:-webkit-autofill:focus {
 }
 
 .container {
+	position: relative;
 	background: radial-gradient(circle at 100% 100%, #4ca1d2, #285bae);
 	-webkit-box-flex: 1;
 	-ms-flex: 1 1;
@@ -242,6 +243,34 @@ option {
 .checkbox-input:checked + .checkbox-inner::after {
 	left: 18px;
 	background-image: url("./assets/images/mute-off.svg");
+}
+
+.start-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	display: inline-block;
+	padding: 12px 36px;
+	border-radius: 24px;
+	font-weight: 500;
+	font-size: 24px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: all 0.3s ease;
+	background-color: #b0c255;
+	color: white;
+}
+
+.start-button:active {
+	transform: translate(-49%, -45%);
+}
+
+.game-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .scores {

@@ -1,7 +1,11 @@
 import { Select } from './select/select.component.js';
 import { Switch } from './switch/switch.component.js';
+import { gridDimensions } from '../../../data/game.data.js';
+import { pointsToWin } from '../../../data/game.data.js';
+import { decreaseDeltaInMs } from '../../../data/game.data.js';
+import { maximumMisses } from '../../../data/game.data.js';
 
-export function Settings(data) {
+export function Settings(settingsData) {
 	const containerElement = document.createElement('div');
 	containerElement.classList.add('settings');
 
@@ -17,17 +21,41 @@ export function Settings(data) {
 		containerElement.append(SettingElement);
 	}
 
-	for (let i = 0; i < data.length; i++) {
-		if (data[i].title !== 'mute mode') {
-			let a = data[i];
-			let b = Select(data[i].controlData);
-			renderSettingElement(a, b);
+	for (let i = 0; i < settingsData.length; i++) {
+		if (settingsData[i].title !== 'mute mode') {
+			let data = settingsData[i];
+			let controlType = Select(settingsData[i].controlData);
+			renderSettingElement(data, controlType);
 		} else {
-			let a = data[i];
-			let b = Switch(data[i].controlData);
-			renderSettingElement(a, b);
+			let data = settingsData[i];
+			let controlType = Switch(settingsData[i].controlData);
+			renderSettingElement(data, controlType);
 		}
 	}
 
 	return containerElement;
 }
+
+export function changeSettings() {
+	const selectGridElement = document.getElementById('gridSize');
+	selectGridElement.addEventListener('click', () => {
+		gridDimensions(selectGridElement);
+	});
+
+	const selectPointsElement = document.getElementById('pointsToWin');
+	selectPointsElement.addEventListener('click', () => {
+		pointsToWin(selectPointsElement);
+	});
+
+	const selectMsAfterElement = document.getElementById('msAfterTheCatch');
+	selectMsAfterElement.addEventListener('click', () => {
+		decreaseDeltaInMs(selectMsAfterElement);
+	});
+
+	const selectMaxMissesElement = document.getElementById('maximumMisses');
+	selectMaxMissesElement.addEventListener('click', () => {
+		maximumMisses(selectMaxMissesElement);
+	});
+
+}
+

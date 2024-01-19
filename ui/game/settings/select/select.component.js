@@ -1,14 +1,14 @@
-export function Select(data) {
+export function Select(settingsData) {
 	const container = document.createElement('div');
 	container.classList.add('select-wrapper');
 	const selectSettingElement = document.createElement('select');
 	selectSettingElement.classList.add('select');
-	selectSettingElement.id = data.selectId;
+	selectSettingElement.id = settingsData.selectId;
 
-	for (let i = 0; i < data.values.length; i++) {
+	for (let i = 0; i < settingsData.values.length; i++) {
 		const selectItem = document.createElement('option');
-		selectItem.value = data.values[i];
-		let label = data.labels[i];
+		selectItem.value = settingsData.values[i];
+		let label = settingsData.labels[i];
 		selectItem.append(label);
 		selectSettingElement.append(selectItem);
 	}
