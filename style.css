@@ -257,7 +257,7 @@ option {
 	font-size: 24px;
 	letter-spacing: 1px;
 	text-transform: uppercase;
-	transition: all 0.3s ease;
+	transition: transform 0.3s ease;
 	background-color: #b0c255;
 	color: white;
 }
@@ -290,8 +290,14 @@ option {
 	font-weight: 500;
 }
 
+table {
+	border-spacing: 12px;
+}
+
 table td {
-	border: 1px solid black;
-	width: 80px;
-	height: 80px;
+	border: 2px solid #54bae0;
+	border-radius: 4px;
+	width: 85px;
+	height: 85px;
+	background-color: #4580c4;
 }

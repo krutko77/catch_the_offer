@@ -7,6 +7,7 @@ export function Switch(settingsData) {
 	inputSwitchSettingElement.classList.add('checkbox-input');
 	inputSwitchSettingElement.type = 'checkbox';
 	inputSwitchSettingElement.id = settingsData.checkboxId;
+	inputSwitchSettingElement.checked = true;
 	const spanSwitchSettingElement = document.createElement('span');
 	spanSwitchSettingElement.classList.add('checkbox-inner');
 

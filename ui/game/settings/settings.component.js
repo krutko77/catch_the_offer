@@ -4,7 +4,9 @@ import { gridDimensions } from '../../../data/game.data.js';
 import { pointsToWin } from '../../../data/game.data.js';
 import { decreaseDeltaInMs } from '../../../data/game.data.js';
 import { maximumMisses } from '../../../data/game.data.js';
+import { isMuted } from '../../../data/game.data.js';
 
+// панель настроек
 export function Settings(settingsData) {
 	const containerElement = document.createElement('div');
 	containerElement.classList.add('settings');
@@ -15,12 +17,12 @@ export function Settings(settingsData) {
 		const titleSettingElement = document.createElement('h2');
 		titleSettingElement.textContent = data.title;
 
-		let controlBlockElement = controlType;
+		let controlBlockElement = controlType; // select или switch
 
 		SettingElement.append(titleSettingElement, controlBlockElement);
 		containerElement.append(SettingElement);
 	}
-
+	// создаем элементы панели настроек
 	for (let i = 0; i < settingsData.length; i++) {
 		if (settingsData[i].title !== 'mute mode') {
 			let data = settingsData[i];
@@ -36,6 +38,7 @@ export function Settings(settingsData) {
 	return containerElement;
 }
 
+// назначаем подписчиков на клик элементов настроек
 export function changeSettings() {
 	const selectGridElement = document.getElementById('gridSize');
 	selectGridElement.addEventListener('click', () => {
@@ -57,5 +60,9 @@ export function changeSettings() {
 		maximumMisses(selectMaxMissesElement);
 	});
 
+	const SwitchSettingElement = document.getElementById('checkbox');
+	SwitchSettingElement.addEventListener('change', () => {
+		isMuted(SwitchSettingElement);
+	});
 }
 

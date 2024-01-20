@@ -2,6 +2,7 @@ import { Player } from '../../sound/player.js';
 import { Scores } from './scores/scores.component.js';
 import { Grid } from './grid/grid.component.js';
 
+// компонент, включающий в себя компонентты Scores и Grid
 export function Game() {
 	Player();
 

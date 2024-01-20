@@ -1,5 +1,6 @@
 import { OFFER_STATUSES, catchOffer, data, subscribe } from "../../../../data/game.data.js";
 
+// ячейка игрового поля
 export function Cell(x, y) {
 
 	subscribe(() => {
@@ -14,6 +15,7 @@ export function Cell(x, y) {
 	return cellEl;
 }
 
+// изменение координат ячейки игрового поля
 function update(x, y, cellEl) {
 	cellEl.innerHTML = '';
 

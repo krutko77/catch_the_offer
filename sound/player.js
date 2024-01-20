@@ -8,7 +8,7 @@ export function Player() {
 	let prevStatus = data.offerStatus;
 
 	subscribe(() => {
-		if (data.offerStatus === OFFER_STATUSES.caught && prevStatus !== OFFER_STATUSES.caught) {
+		if (data.offerStatus === OFFER_STATUSES.caught && prevStatus !== OFFER_STATUSES.caught && data.settings.isMuted === true) {
 			catchAudio.currentTime = 0;
 			catchAudio.play();
 		}

@@ -1,3 +1,12 @@
+// статусы App при разных режимах
+export const APP_STATUSES = {
+	start: 'start',
+	game: 'game',
+	youWin: 'youWin',
+	youLose: 'youLose'
+}
+
+// статусы cell при отображении оффера
 export const OFFER_STATUSES = {
 	default: 'default',
 	miss: 'miss',
@@ -14,6 +23,7 @@ export const data = {
 		decreaseDeltaInMs: 100,
 		isMuted: true
 	},
+	appStatus: APP_STATUSES.start,
 	offerStatus: OFFER_STATUSES.default,
 	coords: {
 		current: {
@@ -31,18 +41,18 @@ export const data = {
 	}
 }
 
-let subscribers = []
+let subscribers = [] // массив подписчиков
 
+// функция вызова каждого подписчика из массива
 function notify() {
 	subscribers.forEach(subscriber => subscriber());
 }
-
+// добавление нового подписчика в массив
 export function subscribe(newSubscriber) {
 	subscribers.push(newSubscriber);
-	/* console.log(subscribers.length) */
 }
 
-// изменение данных через настройки
+// изменение данных data через настройки
 export function gridDimensions(selectGridElement) {
 	data.settings.rowsCount = Number(selectGridElement.value);
 	data.settings.columnsCount = Number(selectGridElement.value);
@@ -66,8 +76,21 @@ export function maximumMisses(selectMaxMissesElement) {
 	console.log("maxMiss", data.settings.maximumMisses)
 }
 
+export function isMuted(SwitchSettingElement) {
+	if (SwitchSettingElement.checked) {
+		data.settings.isMuted = true;
+	} else {
+		data.settings.isMuted = false;
+	}
+}
 
+// изменение статуса App
+export function changeAppStatus(appStatus, callback) {
+	data.appStatus = appStatus;
+	console.log(data.appStatus)
 
+	callback();
+}
 
 
 
@@ -118,7 +141,7 @@ export function catchOffer() {
 	setTimeout(() => {
 		data.offerStatus = OFFER_STATUSES.default;
 		notify();
-	}, 200);
+	}, data.settings.decreaseDeltaInMs);
 
 	moveOfferToRandomPosition();
 	notify()
