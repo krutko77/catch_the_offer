@@ -8,6 +8,7 @@ import { APP_STATUSES, data, changeAppStatus } from './data/game.data.js';
 
 export const containerElement = document.getElementById('container');
 
+// начальная отрисовка приложения
 function renderApp() {
 
 	const settingsElement = Settings(settingsData);
@@ -21,6 +22,7 @@ function renderApp() {
 
 renderApp();
 
+// изменение UI в зависимости от APP_STATUSES
 changeAppStatus(changeApp)
 
 export function changeApp() {

@@ -11,11 +11,10 @@ export function Cell(x, y) {
 
 	update(x, y, cellEl);
 
-
 	return cellEl;
 }
 
-// изменение координат ячейки игрового поля
+// изменение вида оффера в зависимости от статуса оффера и координат
 function update(x, y, cellEl) {
 	cellEl.innerHTML = '';
 

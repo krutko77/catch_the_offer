@@ -10,6 +10,7 @@ import { isMuted } from '../../../data/game.data.js';
 export function Settings(settingsData) {
 	const containerElement = document.createElement('div');
 	containerElement.classList.add('settings');
+	containerElement.id = 'settings';
 
 	function renderSettingElement(data, controlType) {
 		const SettingElement = document.createElement('div');

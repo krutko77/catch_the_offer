@@ -60,20 +60,14 @@ export function gridDimensions(selectGridElement) {
 
 export function pointsToWin(selectPointsElement) {
 	data.settings.pointsToWin = Number(selectPointsElement.value);
-
-	console.log("win", data.settings.pointsToWin)
 }
 
 export function decreaseDeltaInMs(selectMsAfterElement) {
 	data.settings.decreaseDeltaInMs = Number(selectMsAfterElement.value);
-
-	console.log("ms", data.settings.decreaseDeltaInMs)
 }
 
 export function maximumMisses(selectMaxMissesElement) {
 	data.settings.maximumMisses = Number(selectMaxMissesElement.value);
-
-	console.log("maxMiss", data.settings.maximumMisses)
 }
 
 export function isMuted(SwitchSettingElement) {
@@ -93,9 +87,10 @@ export function changeAppStatus(appStatus, callback) {
 }
 
 
-
+// перемещение оффера
 let stepIntervalId;
 
+// интервал перемещения оффера
 function runStepInterval() {
 	stepIntervalId = setInterval(() => {
 		missOffer();
@@ -104,8 +99,12 @@ function runStepInterval() {
 	}, 2000);
 }
 
-runStepInterval();
+// интервал перед началом игры
+setTimeout(() => {
+	runStepInterval();
+}, 2000);
 
+// определение рамдомных координат для оффера с проверкой
 function moveOfferToRandomPosition() {
 	let newX = null;
 	let newY = null;
@@ -119,6 +118,7 @@ function moveOfferToRandomPosition() {
 	data.coords.current.y = newY;
 }
 
+// если оффер не поймали
 function missOffer() {
 	data.offerStatus = OFFER_STATUSES.miss;
 	data.score.missCount++;
@@ -132,6 +132,7 @@ function missOffer() {
 	}, 200);
 }
 
+// если оффер поймали
 export function catchOffer() {
 	data.offerStatus = OFFER_STATUSES.caught;
 	data.score.caughtCount++;
