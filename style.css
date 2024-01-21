@@ -29,6 +29,7 @@ body {
 	line-height: 24px;
 	font-family: "Roboto", sans-serif;
 	font-size: 14px;
+	font-weight: 400;
 	-ms-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
@@ -245,21 +246,24 @@ option {
 	background-image: url("./assets/images/mute-off.svg");
 }
 
-.start-button {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+.button {
 	display: inline-block;
 	padding: 12px 36px;
 	border-radius: 24px;
 	font-weight: 500;
 	font-size: 24px;
 	letter-spacing: 1px;
-	text-transform: uppercase;
 	transition: transform 0.3s ease;
 	background-color: #b0c255;
 	color: white;
+}
+
+.start-button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-transform: uppercase;
 }
 
 .start-button:active {
@@ -300,4 +304,97 @@ table td {
 	width: 85px;
 	height: 85px;
 	background-color: #4580c4;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.card-wrapper {
+	height: 500px;
+	width: min-content;
+	display: flex;
+	align-items: flex-end;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.card-body {
+	text-align: center;
+	font-size: 18px;
+	color: #3676bc;
+	background-color: white;
+	padding: 70px 25px 25px;
+	width: 280px;
+	min-height: 410px;
+	position: relative;
+	z-index: 1;
+	border-radius: 10px;
+}
+
+.card-title {
+	font-size: 48px;
+	font-weight: 600;
+	line-height: 60px;
+}
+
+.card-label {
+	margin-bottom: 20px;
+}
+
+ul li::not(:last-child) {
+	margin-bottom: 20px;
+}
+
+ul li:last-child {
+	margin-bottom: 30px;
+}
+
+.list-item {
+	display: flex;
+	justify-content: space-between;
+}
+
+.right-cell {
+	font-size: 24px;
+	font-weight: 500;
+}
+
+.card-group-img-1 {
+	position: absolute;
+	top: 17px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #3472ba;
+	width: 152px;
+	height: 152px;
+	border-radius: 76px;
+	z-index: 2;
+}
+
+.card-group-img-2 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 144px;
+	height: 144px;
+	border-radius: 72px;
+	z-index: 3;
+}
+
+.card-group-img-3 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #3472ba;
+	width: 134px;
+	height: 134px;
+	border-radius: 67px;
+	z-index: 4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

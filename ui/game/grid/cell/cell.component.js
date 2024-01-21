@@ -36,4 +36,7 @@ function update(x, y, cellEl) {
 		offerEl.src = 'assets/images/missed-offer.png';
 		cellEl.append(offerEl);
 	}
+	if (data.offerStatus === OFFER_STATUSES.stop) {
+		return;
+	}
 }

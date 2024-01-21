@@ -2,15 +2,15 @@
 export const APP_STATUSES = {
 	start: 'start',
 	game: 'game',
-	youWin: 'youWin',
-	youLose: 'youLose'
+	final: 'final'
 }
 
 // статусы cell при отображении оффера
 export const OFFER_STATUSES = {
 	default: 'default',
 	miss: 'miss',
-	caught: 'caught'
+	caught: 'caught',
+	stop: 'stop'
 }
 
 export const data = {
@@ -81,8 +81,6 @@ export function isMuted(SwitchSettingElement) {
 // изменение статуса App
 export function changeAppStatus(appStatus, callback) {
 	data.appStatus = appStatus;
-	console.log(data.appStatus)
-
 	callback();
 }
 
@@ -90,8 +88,9 @@ export function changeAppStatus(appStatus, callback) {
 // перемещение оффера
 let stepIntervalId;
 
-// интервал перемещения оффера
+// начало игры, перемещение оффера
 function runStepInterval() {
+
 	stepIntervalId = setInterval(() => {
 		missOffer();
 		moveOfferToRandomPosition(true);
@@ -150,7 +149,15 @@ export function catchOffer() {
 	runStepInterval();
 }
 
+export function stopOffer() {
+	data.offerStatus = OFFER_STATUSES.stop;
+}
 
 function getRandom(N) {
 	return Math.floor(Math.random() * (N + 1));
 }
+
+
+
+
+
