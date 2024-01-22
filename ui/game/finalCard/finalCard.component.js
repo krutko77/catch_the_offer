@@ -1,5 +1,5 @@
 import { renderApp } from '../../../main.js';
-import { APP_STATUSES, changeAppStatus } from '../../../data/game.data.js';
+import { APP_STATUSES, changeAppStatus, clearScores, changeSettingsDataToInitialState } from '../../../data/game.data.js';
 import { CardImg } from './cardImg/cardImg.component.js';
 
 export function FinalCard(finalData) {
@@ -30,20 +30,20 @@ export function FinalCard(finalData) {
 		const leftCell = document.createElement('span');
 		leftCell.classList.add('left-cell');
 		leftCell.innerText = array[i][0];
-		cardList.append(leftCell);
 		const rightCell = document.createElement('span');
 		rightCell.classList.add('right-cell');
 		rightCell.innerText = array[i][1];
-		cardList.append(rightCell);
-		cardBody.append(cardList);
+		contentBox.append(leftCell, rightCell);
+		cardList.append(contentBox)
 	}
 
 	const cardButton = document.createElement('button');
 	cardButton.classList.add('card-button', 'button');
 	cardButton.innerText = 'Play again';
-	cardButton.addEventListener('click', () => changeAppStatus(APP_STATUSES.start, renderApp))
+	cardButton.addEventListener('click', () => changeAppStatus(APP_STATUSES.start, renderApp), changeSettingsDataToInitialState(), clearScores())
 
 	const cardImg = CardImg(finalData.iconSrc);
+	console.log('cardImg', cardImg)
 	cardBody.append(cardTitle, cardLabel, cardList, cardButton, cardImg);
 
 	container.append(cardBody);

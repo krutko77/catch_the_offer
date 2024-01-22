@@ -12,14 +12,7 @@ export const OFFER_STATUSES = {
 	caught: 'caught'
 }
 
-// статус FinalCard
-export const FINALCARD_STATUSES = {
-	youWin: 'You Win',
-	youLose: 'You Lose'
-}
-
 export const data = {
-	// array for cells: cell = {x,y}
 	settings: {
 		rowsCount: 3,
 		columnsCount: 3,
@@ -95,27 +88,24 @@ export function isMuted(SwitchSettingElement) {
 // изменение статуса App
 export function changeAppStatus(appStatus, renderApp) {
 	data.appStatus = appStatus;
-	console.log(renderApp)
 	renderApp();
+	if (data.appStatus === APP_STATUSES.game) { }
+	runStepInterval();
 }
 
 // перемещение оффера
 let stepIntervalId;
 
 // начало игры, перемещение оффера
-function runStepInterval() {
-
-	stepIntervalId = setInterval(() => {
-		missOffer();
-		moveOfferToRandomPosition(true);
-		notify();
-	}, 2000);
+export function runStepInterval() {
+	if (data.appStatus === APP_STATUSES.game) {
+		stepIntervalId = setInterval(() => {
+			missOffer();
+			moveOfferToRandomPosition(true);
+			notify();
+		}, 2000);
+	}
 }
-
-// интервал перед началом игры
-setTimeout(() => {
-	runStepInterval();
-}, 2000);
 
 // определение рамдомных координат для оффера с проверкой
 function moveOfferToRandomPosition() {
@@ -167,6 +157,11 @@ export function stopOffer() {
 	clearInterval(stepIntervalId);
 }
 
+export function clearScores() {
+	data.score.caughtCount = 0;
+	data.score.missCount = 0;
+}
+
 function getRandom(N) {
 	return Math.floor(Math.random() * (N + 1));
 }
@@ -174,15 +169,12 @@ function getRandom(N) {
 // изменение данных FinalCard
 export function changeDataFinalCard(caughtCount, missCount) {
 	if (caughtCount === data.settings.pointsToWin) {
-
 		finalCardData.sumCatch = caughtCount;
 		finalCardData.sumMiss = missCount;
 		finalCardData.sumTime = 20;
 		finalCardData.iconSrc = 'assets/images/yuo-win-icon.svg';
-
 	}
 	if (missCount === data.settings.maximumMisses) {
-
 		finalCardData.title = 'You Lose!';
 		finalCardData.label = "You'll be lucky next time";
 		finalCardData.sumCatch = caughtCount,
@@ -193,4 +185,12 @@ export function changeDataFinalCard(caughtCount, missCount) {
 
 }
 
-
+// приведерие всех настроек к начальному состоянию
+export function changeSettingsDataToInitialState() {
+	data.settings.rowsCount = 3;
+	data.settings.columnsCount = 3;
+	data.settings.pointsToWin = 20;
+	data.settings.maximumMisses = 3;
+	data.settings.decreaseDeltaInMs = 100;
+	data.settings.isMuted = true;
+}

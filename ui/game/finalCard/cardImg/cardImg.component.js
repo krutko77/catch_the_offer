@@ -16,5 +16,5 @@ export function CardImg(iconSrc) {
 	cardIcon.src = iconSrc;
 	cardGroupImg1.append(cardIcon);
 
-	return
+	return cardGroupImg1;
 }

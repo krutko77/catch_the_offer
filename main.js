@@ -3,15 +3,10 @@ import { settingsData } from '../../data/settings.data.js';
 import { Game } from './ui/game/game.component.js';
 import { Button } from './ui/game/button/button.component.js';
 import { defineListenersSettings } from './ui/game/settings/settings.component.js';
-import { APP_STATUSES, data, changeAppStatus } from './data/game.data.js';
+import { APP_STATUSES, data, changeAppStatus, finalCardData } from './data/game.data.js';
 import { FinalCard } from './ui/game/finalCard/finalCard.component.js';
-import { finalCardData } from './data/game.data.js';
-
-
 
 export const containerElement = document.getElementById('container');
-
-
 
 export function renderApp() {
 	console.log('data.appStatus', data.appStatus)
@@ -33,16 +28,10 @@ export function renderApp() {
 	if (data.appStatus === APP_STATUSES.final) {
 		containerElement.innerHTML = '';
 		const finalElement = FinalCard(finalCardData);
-		console.log('finalCardData', finalCardData)
-		console.log('FinalCard', FinalCard)
-		console.log('finalElement', finalElement)
-
 		containerElement.append(finalElement);
 	}
-
 	return;
 }
-console.log(renderApp)
 
 renderApp();
 
