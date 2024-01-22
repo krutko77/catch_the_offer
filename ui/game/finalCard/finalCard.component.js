@@ -1,5 +1,5 @@
+import { renderApp } from '../../../main.js';
 import { APP_STATUSES, changeAppStatus } from '../../../data/game.data.js';
-import { changeApp } from '../../../main.js';
 import { CardImg } from './cardImg/cardImg.component.js';
 
 export function FinalCard(finalData) {
@@ -41,15 +41,13 @@ export function FinalCard(finalData) {
 	const cardButton = document.createElement('button');
 	cardButton.classList.add('card-button', 'button');
 	cardButton.innerText = 'Play again';
-	cardButton.addEventListener('click', () => changeAppStatus(APP_STATUSES.start, changeApp))
+	cardButton.addEventListener('click', () => changeAppStatus(APP_STATUSES.start, renderApp))
 
 	const cardImg = CardImg(finalData.iconSrc);
 	cardBody.append(cardTitle, cardLabel, cardList, cardButton, cardImg);
 
 	container.append(cardBody);
-	changeAppStatus(APP_STATUSES.final, changeApp);
 
-	return
+	return container;
 }
 
-export const finalDataCard = FinalCard();

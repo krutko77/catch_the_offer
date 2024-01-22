@@ -9,8 +9,13 @@ export const APP_STATUSES = {
 export const OFFER_STATUSES = {
 	default: 'default',
 	miss: 'miss',
-	caught: 'caught',
-	stop: 'stop'
+	caught: 'caught'
+}
+
+// статус FinalCard
+export const FINALCARD_STATUSES = {
+	youWin: 'You Win',
+	youLose: 'You Lose'
 }
 
 export const data = {
@@ -39,6 +44,15 @@ export const data = {
 		missCount: 0,
 		caughtCount: 0
 	}
+}
+
+export const finalCardData = {
+	title: 'You Win!',
+	label: 'Congratulations',
+	sumCatch: 0,
+	sumMiss: 0,
+	sumTime: 0,
+	iconSrc: 'assets/images/yuo-win-icon.svg'
 }
 
 let subscribers = [] // массив подписчиков
@@ -79,11 +93,11 @@ export function isMuted(SwitchSettingElement) {
 }
 
 // изменение статуса App
-export function changeAppStatus(appStatus, callback) {
+export function changeAppStatus(appStatus, renderApp) {
 	data.appStatus = appStatus;
-	callback();
+	console.log(renderApp)
+	renderApp();
 }
-
 
 // перемещение оффера
 let stepIntervalId;
@@ -150,14 +164,33 @@ export function catchOffer() {
 }
 
 export function stopOffer() {
-	data.offerStatus = OFFER_STATUSES.stop;
+	clearInterval(stepIntervalId);
 }
 
 function getRandom(N) {
 	return Math.floor(Math.random() * (N + 1));
 }
 
+// изменение данных FinalCard
+export function changeDataFinalCard(caughtCount, missCount) {
+	if (caughtCount === data.settings.pointsToWin) {
 
+		finalCardData.sumCatch = caughtCount;
+		finalCardData.sumMiss = missCount;
+		finalCardData.sumTime = 20;
+		finalCardData.iconSrc = 'assets/images/yuo-win-icon.svg';
 
+	}
+	if (missCount === data.settings.maximumMisses) {
+
+		finalCardData.title = 'You Lose!';
+		finalCardData.label = "You'll be lucky next time";
+		finalCardData.sumCatch = caughtCount,
+			finalCardData.sumMiss = missCount,
+			finalCardData.sumTime = 20,
+			finalCardData.iconSrc = 'assets/images/yuo-lose-icon.svg'
+	}
+
+}
 
 

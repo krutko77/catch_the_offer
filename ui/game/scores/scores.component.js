@@ -1,5 +1,5 @@
-import { data, subscribe, stopOffer } from "../../../data/game.data.js";
-import { FinalCard } from "../finalCard/finalCard.component.js";
+import { data, subscribe, stopOffer, changeAppStatus, APP_STATUSES, changeDataFinalCard } from "../../../data/game.data.js";
+import { renderApp } from "../../../main.js";
 
 
 export function Scores() {
@@ -35,40 +35,10 @@ function update(containerElement) {
 function stopGame(caughtCount, missCount) {
 	if (caughtCount === data.settings.pointsToWin || missCount === data.settings.maximumMisses) {
 		stopOffer();
-		FinalData();
+		changeDataFinalCard(caughtCount, missCount);
+		changeAppStatus(APP_STATUSES.final, renderApp);
 
-		console.log('data.score.caughtCount', data.score.caughtCount)
-		console.log('data.score.missCount', data.score.missCount)
-
-		console.log('data.offerStatus', data.offerStatus)
 		console.log('data.appStatus', data.appStatus)
 	}
 }
 
-// определение финальных результатов и отрисовка финальной карточки
-function FinalData() {
-	if (data.score.caughtCount === data.settings.pointsToWin) {
-		const finalData = {
-			title: 'You Win!',
-			label: 'Congratulations',
-			sumCatch: data.score.caughtCount,
-			sumMiss: data.score.missCount,
-			sumTime: 20,
-			iconSrc: 'assets/images/yuo-win-icon.svg'
-		}
-	}
-	if (data.score.missCount === data.settings.maximumMisses) {
-		const finalData = {
-			title: 'You Lose!',
-			label: "You'll be lucky next time",
-			sumCatch: data.score.caughtCount,
-			sumMiss: data.score.missCount,
-			sumTime: 20,
-			iconSrc: 'assets/images/yuo-lose-icon.svg'
-		}
-		return finalData;
-	}
-}
-
-console.log('function FinalData', FinalData)
-FinalCard(FinalData);

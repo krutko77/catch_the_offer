@@ -40,7 +40,7 @@ export function Settings(settingsData) {
 }
 
 // назначаем подписчиков на клик элементов настроек
-export function changeSettings() {
+export function defineListenersSettings() {
 	const selectGridElement = document.getElementById('gridSize');
 	selectGridElement.addEventListener('click', () => {
 		gridDimensions(selectGridElement);
