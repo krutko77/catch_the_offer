@@ -1,3 +1,4 @@
+// данные для отрисовки элементов настройки
 export const settingsData = [
 	{
 		title: 'Grid size',

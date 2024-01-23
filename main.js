@@ -2,20 +2,19 @@ import { Settings } from './ui/game/settings/settings.component.js';
 import { settingsData } from '../../data/settings.data.js';
 import { Game } from './ui/game/game.component.js';
 import { Button } from './ui/game/button/button.component.js';
-import { defineListenersSettings } from './ui/game/settings/settings.component.js';
+import { ListenersSettings } from './ui/game/settings/settings.component.js';
 import { APP_STATUSES, data, changeAppStatus, finalCardData } from './data/game.data.js';
 import { FinalCard } from './ui/game/finalCard/finalCard.component.js';
 
 export const containerElement = document.getElementById('container');
 
 export function renderApp() {
-	console.log('data.appStatus', data.appStatus)
 	if (data.appStatus === APP_STATUSES.start) {
 		containerElement.innerHTML = '';
 		const settingsElement = Settings(settingsData);
 		const buttonElement = Button();
 		containerElement.append(settingsElement);
-		defineListenersSettings();
+		ListenersSettings();
 		containerElement.append(buttonElement);
 	}
 	if (data.appStatus === APP_STATUSES.game) {
@@ -35,7 +34,7 @@ export function renderApp() {
 
 renderApp();
 
-changeAppStatus(renderApp)
+changeAppStatus(renderApp);
 
 
 

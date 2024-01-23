@@ -1,7 +1,6 @@
 import { data, subscribe, stopOffer, changeAppStatus, APP_STATUSES, changeDataFinalCard } from "../../../data/game.data.js";
 import { renderApp } from "../../../main.js";
 
-
 export function Scores() {
 
 	subscribe(() => {
@@ -37,8 +36,6 @@ function stopGame(caughtCount, missCount) {
 		stopOffer();
 		changeDataFinalCard(caughtCount, missCount);
 		changeAppStatus(APP_STATUSES.final, renderApp);
-
-		console.log('data.appStatus', data.appStatus)
 	}
 }
 

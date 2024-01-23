@@ -1,8 +1,9 @@
+import { createElementWithClass } from "../../../../helpers.js";
+
 export function Select(settingsData) {
-	const container = document.createElement('div');
-	container.classList.add('select-wrapper');
-	const selectSettingElement = document.createElement('select');
-	selectSettingElement.classList.add('select');
+	const container = createElementWithClass('div', 'select-wrapper');
+
+	const selectSettingElement = createElementWithClass('select', 'select');
 	selectSettingElement.id = settingsData.selectId;
 
 	for (let i = 0; i < settingsData.values.length; i++) {

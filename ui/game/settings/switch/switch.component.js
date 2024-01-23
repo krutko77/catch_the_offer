@@ -1,15 +1,15 @@
+import { createElementWithClass } from "../../../../helpers.js";
+
 export function Switch(settingsData) {
 	const container = document.createElement('label');
 	container.classList.add('checkbox');
 	container.htmlFor = 'checkbox';
 
-	const inputSwitchSettingElement = document.createElement('input');
-	inputSwitchSettingElement.classList.add('checkbox-input');
+	const inputSwitchSettingElement = createElementWithClass('input', 'checkbox-input');
 	inputSwitchSettingElement.type = 'checkbox';
 	inputSwitchSettingElement.id = settingsData.checkboxId;
 	inputSwitchSettingElement.checked = true;
-	const spanSwitchSettingElement = document.createElement('span');
-	spanSwitchSettingElement.classList.add('checkbox-inner');
+	const spanSwitchSettingElement = createElementWithClass('span', 'checkbox-inner');
 
 	container.append(inputSwitchSettingElement, spanSwitchSettingElement);
 

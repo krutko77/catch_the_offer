@@ -12,6 +12,7 @@ export const OFFER_STATUSES = {
 	caught: 'caught'
 }
 
+// общие данные
 export const data = {
 	settings: {
 		rowsCount: 3,
@@ -39,12 +40,14 @@ export const data = {
 	}
 }
 
+// данные для finalCardData 
 export const finalCardData = {
 	title: 'You Win!',
 	label: 'Congratulations',
 	sumCatch: 0,
 	sumMiss: 0,
-	sumTime: 0,
+	minutes: 0,
+	seconds: 0,
 	iconSrc: 'assets/images/yuo-win-icon.svg'
 }
 
@@ -93,10 +96,10 @@ export function changeAppStatus(appStatus, renderApp) {
 	runStepInterval();
 }
 
-// перемещение оффера
+// делаем доступной функцию setInterval()
 let stepIntervalId;
 
-// начало игры, перемещение оффера
+// начало игры, перемещение оффера 
 export function runStepInterval() {
 	if (data.appStatus === APP_STATUSES.game) {
 		stepIntervalId = setInterval(() => {
@@ -153,17 +156,36 @@ export function catchOffer() {
 	runStepInterval();
 }
 
-export function stopOffer() {
-	clearInterval(stepIntervalId);
+function getRandom(N) {
+	return Math.floor(Math.random() * (N + 1));
 }
 
+// очищаем счетчик
 export function clearScores() {
 	data.score.caughtCount = 0;
 	data.score.missCount = 0;
 }
 
-function getRandom(N) {
-	return Math.floor(Math.random() * (N + 1));
+let gameTimerId;
+
+// таймер игры
+export function GameTimer() {
+	if (data.appStatus === APP_STATUSES.game) {
+		gameTimerId = setInterval(() => {
+			finalCardData.seconds++;
+		}, 1000);
+
+		if (finalCardData.seconds >= 60) {
+			finalCardData.minutes++;
+			finalCardData.seconds = 0;
+		}
+	}
+}
+
+// оставка перемещений оффера и таймера
+export function stopOffer() {
+	clearInterval(stepIntervalId);
+	clearInterval(gameTimerId);
 }
 
 // изменение данных FinalCard
@@ -171,7 +193,6 @@ export function changeDataFinalCard(caughtCount, missCount) {
 	if (caughtCount === data.settings.pointsToWin) {
 		finalCardData.sumCatch = caughtCount;
 		finalCardData.sumMiss = missCount;
-		finalCardData.sumTime = 20;
 		finalCardData.iconSrc = 'assets/images/yuo-win-icon.svg';
 	}
 	if (missCount === data.settings.maximumMisses) {
@@ -179,14 +200,13 @@ export function changeDataFinalCard(caughtCount, missCount) {
 		finalCardData.label = "You'll be lucky next time";
 		finalCardData.sumCatch = caughtCount,
 			finalCardData.sumMiss = missCount,
-			finalCardData.sumTime = 20,
 			finalCardData.iconSrc = 'assets/images/yuo-lose-icon.svg'
 	}
 
 }
 
 // приведерие всех настроек к начальному состоянию
-export function changeSettingsDataToInitialState() {
+export function resetSettings() {
 	data.settings.rowsCount = 3;
 	data.settings.columnsCount = 3;
 	data.settings.pointsToWin = 20;
@@ -194,3 +214,11 @@ export function changeSettingsDataToInitialState() {
 	data.settings.decreaseDeltaInMs = 100;
 	data.settings.isMuted = true;
 }
+
+// обнуление таймера
+export function resetTimer() {
+	finalCardData.minutes = 0;
+	finalCardData.seconds = 0;
+}
+
+

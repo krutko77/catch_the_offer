@@ -5,24 +5,16 @@ import { pointsToWin } from '../../../data/game.data.js';
 import { decreaseDeltaInMs } from '../../../data/game.data.js';
 import { maximumMisses } from '../../../data/game.data.js';
 import { isMuted } from '../../../data/game.data.js';
+import { renderSettingElement } from './renderSettingsElement/renderSettingsElement.component.js';
+import { createElementWithClass } from '../../../helpers.js';
+
+export let containerElement;
 
 // панель настроек
 export function Settings(settingsData) {
-	const containerElement = document.createElement('div');
-	containerElement.classList.add('settings');
+	containerElement = createElementWithClass('div', 'settings');
 	containerElement.id = 'settings';
 
-	function renderSettingElement(data, controlType) {
-		const SettingElement = document.createElement('div');
-		SettingElement.classList.add('settings-item');
-		const titleSettingElement = document.createElement('h2');
-		titleSettingElement.textContent = data.title;
-
-		let controlBlockElement = controlType; // select или switch
-
-		SettingElement.append(titleSettingElement, controlBlockElement);
-		containerElement.append(SettingElement);
-	}
 	// создаем элементы панели настроек
 	for (let i = 0; i < settingsData.length; i++) {
 		if (settingsData[i].title !== 'mute mode') {
@@ -35,12 +27,11 @@ export function Settings(settingsData) {
 			renderSettingElement(data, controlType);
 		}
 	}
-
 	return containerElement;
 }
 
 // назначаем подписчиков на клик элементов настроек
-export function defineListenersSettings() {
+export function ListenersSettings() {
 	const selectGridElement = document.getElementById('gridSize');
 	selectGridElement.addEventListener('click', () => {
 		gridDimensions(selectGridElement);
