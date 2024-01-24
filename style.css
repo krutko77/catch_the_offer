@@ -128,12 +128,42 @@ select:-webkit-autofill:focus {
 	align-items: center;
 }
 
+.title {
+	padding-top: 50px;
+	text-align: center;
+	font-size: 45px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 50px;
+}
+
 .settings {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 160px;
+	grid-template-columns: 1fr 1fr 1fr 1fr 0.67fr;
+	grid-template-areas: "grid-size win catch max-misses  mute-mode";
 	column-gap: 12px;
 	width: 100%;
 	margin-bottom: 35px;
+}
+
+.settings-item:nth-child(1) {
+	grid-area: grid-size;
+}
+
+.settings-item:nth-child(2) {
+	grid-area: win;
+}
+
+.settings-item:nth-child(3) {
+	grid-area: catch;
+}
+
+.settings-item:nth-child(4) {
+	grid-area: max-misses;
+}
+
+.settings-item:nth-child(5) {
+	grid-area: mute-mode;
 }
 
 .select-wrapper {
@@ -415,4 +445,26 @@ table td {
 
 .card-button:active {
 	transform: translate(1px, 2px);
+}
+
+@media screen and (max-width: 767px) {
+	.settings {
+		grid-template-rows: auto;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-areas:
+			"grid-size win catch max-misses"
+			". mute-mode mute-mode .";
+		gap: 10px;
+	}
+
+	.settings-item:nth-child(5) {
+		justify-self: center;
+		display: flex;
+		align-items: flex-end;
+		height: 20px;
+	}
+
+	.settings-item:nth-child(5) h2 {
+		margin-right: 10px;
+	}
 }
