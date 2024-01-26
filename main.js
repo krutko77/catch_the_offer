@@ -22,8 +22,7 @@ export function renderApp() {
 		const title = document.getElementById('title');
 		title.style.display = 'none';
 		const button = document.getElementById('startButton');
-		button.style.opacity = '0';
-		button.style.visibility = 'hidden';
+		button.style.display = 'none';
 		const gameElement = Game();
 		containerElement.append(gameElement);
 	}

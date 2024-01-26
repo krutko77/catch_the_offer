@@ -63,7 +63,6 @@ ul li {
 
 img {
 	vertical-align: top;
-	cursor: pointer;
 }
 
 h1,
@@ -129,12 +128,18 @@ select:-webkit-autofill:focus {
 }
 
 .title {
+	display: flex;
 	padding-top: 50px;
 	text-align: center;
 	font-size: 45px;
+	line-height: 45px;
 	font-weight: 700;
 	text-transform: uppercase;
 	margin-bottom: 50px;
+}
+
+.first-title {
+	margin-right: 10px;
 }
 
 .settings {
@@ -284,7 +289,6 @@ option {
 	font-weight: 500;
 	font-size: 24px;
 	letter-spacing: 1px;
-	transition: transform 0.3s ease;
 	background-color: #b0c255;
 	color: white;
 }
@@ -337,6 +341,12 @@ table td {
 	background-color: #4580c4;
 	text-align: center;
 	vertical-align: middle;
+}
+
+td img {
+	cursor: pointer;
+	width: 100%;
+	object-fit: cover;
 }
 
 .card-wrapper {
@@ -447,14 +457,15 @@ table td {
 	transform: translate(1px, 2px);
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
 	.settings {
 		grid-template-rows: auto;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-template-areas:
 			"grid-size win catch max-misses"
 			". mute-mode mute-mode .";
-		gap: 10px;
+		column-gap: 10px;
+		row-gap: 10px;
 	}
 
 	.settings-item:nth-child(5) {
@@ -466,5 +477,113 @@ table td {
 
 	.settings-item:nth-child(5) h2 {
 		margin-right: 10px;
+	}
+
+	table {
+		border-spacing: 10px;
+	}
+
+	table td {
+		width: 80px;
+		height: 80px;
+	}
+}
+
+@media screen and (max-width: 767px) {
+	.container {
+		min-height: 100vh;
+		padding: 50px 20px;
+	}
+
+	.title {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.first-title {
+		margin-right: 0;
+	}
+
+	.settings {
+		max-width: 490px;
+		grid-template-rows: auto;
+		grid-template-columns: 1fr 1fr;
+		grid-template-areas:
+			"grid-size win"
+			"catch max-misses"
+			"mute-mode mute-mode";
+	}
+
+	.checkbox-inner::before {
+		top: -6px;
+	}
+
+	.checkbox-inner::after {
+		top: -4px;
+	}
+
+	.start-button {
+		margin-top: 50px;
+		position: static;
+		transform: translate(0, 0);
+	}
+
+	table {
+		border-spacing: 8px;
+	}
+
+	table td {
+		border-radius: 3px;
+		width: 50px;
+		height: 50px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.container {
+		padding: 15px;
+	}
+
+	.title {
+		padding-top: 30px;
+	}
+
+	.settings {
+		max-width: 240px;
+		grid-template-rows: auto;
+		grid-template-columns: 1fr;
+		grid-template-areas:
+			"grid-size"
+			"win"
+			"catch"
+			"max-misses"
+			"mute-mode";
+		margin: 20px;
+	}
+
+	.settings-item:nth-child(5) {
+		justify-self: flex-start;
+	}
+
+	.scores {
+		width: 290px;
+		border-radius: 30px;
+		padding: 12px 36px;
+		margin-bottom: 35px;
+	}
+	.scores span {
+		margin-left: 20px;
+	}
+
+	table {
+		border-spacing: 3px;
+	}
+
+	table td {
+		padding: 0;
+		border-radius: 2px;
+		width: 40px;
+		height: 40px;
 	}
 }
