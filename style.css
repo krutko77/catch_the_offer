@@ -291,6 +291,7 @@ option {
 	letter-spacing: 1px;
 	background-color: #b0c255;
 	color: white;
+	transition: background-color 0.3s ease;
 }
 
 .start-button {
@@ -299,10 +300,6 @@ option {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	text-transform: uppercase;
-}
-
-.button:active {
-	transform: translate(-49%, -45%);
 }
 
 .game-wrapper {
@@ -453,11 +450,27 @@ td img {
 	z-index: 5;
 }
 
-.card-button:active {
-	transform: translate(1px, 2px);
+.card-button {
+	animation: animate 1.2s;
+}
+
+@keyframes animate {
+	0% {
+		transform: scale(0.5);
+		opacity: 0;
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
 
 @media screen and (max-width: 991px) {
+	.container {
+		min-height: 100vh;
+	}
+
 	.settings {
 		grid-template-rows: auto;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -465,7 +478,7 @@ td img {
 			"grid-size win catch max-misses"
 			". mute-mode mute-mode .";
 		column-gap: 10px;
-		row-gap: 10px;
+		row-gap: 20px;
 	}
 
 	.settings-item:nth-child(5) {
@@ -476,7 +489,23 @@ td img {
 	}
 
 	.settings-item:nth-child(5) h2 {
+		position: relative;
 		margin-right: 10px;
+		transform: translateX(-20px);
+	}
+
+	.checkbox-inner::before {
+		top: -6px;
+		left: -18px;
+	}
+
+	.checkbox-inner::after {
+		top: -4px;
+		left: -16px;
+	}
+
+	.checkbox-input:checked + .checkbox-inner::after {
+		left: 0px;
 	}
 
 	table {
@@ -491,7 +520,6 @@ td img {
 
 @media screen and (max-width: 767px) {
 	.container {
-		min-height: 100vh;
 		padding: 50px 20px;
 	}
 
@@ -513,14 +541,6 @@ td img {
 			"grid-size win"
 			"catch max-misses"
 			"mute-mode mute-mode";
-	}
-
-	.checkbox-inner::before {
-		top: -6px;
-	}
-
-	.checkbox-inner::after {
-		top: -4px;
 	}
 
 	.start-button {
@@ -550,6 +570,7 @@ td img {
 	}
 
 	.settings {
+		row-gap: 10px;
 		max-width: 240px;
 		grid-template-rows: auto;
 		grid-template-columns: 1fr;
@@ -559,11 +580,29 @@ td img {
 			"catch"
 			"max-misses"
 			"mute-mode";
-		margin: 20px;
+		margin-bottom: 20px;
 	}
 
 	.settings-item:nth-child(5) {
 		justify-self: flex-start;
+	}
+
+	.checkbox-inner::before {
+		top: -6px;
+		left: 0;
+	}
+
+	.checkbox-inner::after {
+		top: -4px;
+		left: 2px;
+	}
+
+	.checkbox-input:checked + .checkbox-inner::after {
+		left: 18px;
+	}
+
+	.settings-item:nth-child(5) h2 {
+		transform: translateX(0);
 	}
 
 	.scores {
@@ -583,7 +622,22 @@ td img {
 	table td {
 		padding: 0;
 		border-radius: 2px;
-		width: 40px;
-		height: 40px;
+		width: 35px;
+		height: 35px;
+	}
+}
+
+@media (any-hover: hover) {
+	.start-button:hover,
+	.card-button:hover {
+		background-color: #c6da60;
+	}
+
+	.button:active {
+		transform: translate(-49%, -47%);
+	}
+
+	.card-button:active {
+		transform: translate(1px, 2px);
 	}
 }
