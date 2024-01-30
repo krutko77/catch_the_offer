@@ -20,7 +20,7 @@ export const settingsData = [
 		title: 'ms after the catch',
 		controlData: {
 			selectId: 'msAfterTheCatch',
-			values: [200, 150, 120, 100, 80, 50],
+			values: [100, 80, 70, 50, 30, 10],
 			labels: ['200-100 ms', '180-80 ms', '150-70 ms', '130-50 ms', '110-30 ms', '100-10 ms']
 		}
 	},
