@@ -1,41 +1,22 @@
-import { Title } from './ui/game/title/title.component.js';
-import { Settings } from './ui/game/settings/settings.component.js';
-import { settingsData } from '../../data/settings.data.js';
-import { Game } from './ui/game/game.component.js';
-import { Button } from './ui/game/button/button.component.js';
-import { ListenersSettings } from './ui/game/settings/settings.component.js';
-import { APP_STATUSES, data, changeAppStatus, finalCardData } from './data/game.data.js';
-import { FinalCard } from './ui/game/finalCard/finalCard.component.js';
-
-export const containerElement = document.getElementById('container');
+import { APP_STATUSES, data, changeAppStatus } from './data/game.data.js';
+import { renderStartGame } from './ui/renderStartGame/renderStartGame.component.js';
+import { renderGameProcess } from './ui/renderGameProcess/renderGameProcess.component.js';
+import { renderFinalGame } from './ui/renderFinalGame/renderFinalGame.component.js';
 
 export function renderApp() {
 	if (data.appStatus === APP_STATUSES.start) {
-		containerElement.innerHTML = '';
-		const titleElement = Title();
-		const settingsElement = Settings(settingsData);
-		const buttonElement = Button();
-		containerElement.append(titleElement, settingsElement, buttonElement);
-		ListenersSettings();
+		renderStartGame();
 	}
 	if (data.appStatus === APP_STATUSES.game) {
-		const title = document.getElementById('title');
-		title.style.display = 'none';
-		const button = document.getElementById('startButton');
-		button.style.display = 'none';
-		const gameElement = Game();
-		containerElement.append(gameElement);
+		renderGameProcess();
 	}
 	if (data.appStatus === APP_STATUSES.final) {
-		containerElement.innerHTML = '';
-		const finalElement = FinalCard(finalCardData);
-		containerElement.append(finalElement);
+		renderFinalGame();
 	}
 	return;
 }
 
 renderApp();
-
 changeAppStatus(renderApp);
 
 

@@ -63,25 +63,25 @@ export function subscribe(newSubscriber) {
 }
 
 // изменение данных data через настройки
-export function gridDimensions(selectGridElement) {
-	data.settings.rowsCount = Number(selectGridElement.value);
-	data.settings.columnsCount = Number(selectGridElement.value);
+export function gridDimensions(value) {
+	data.settings.rowsCount = value;	
+	data.settings.columnsCount = value;
 }
 
-export function pointsToWin(selectPointsElement) {
-	data.settings.pointsToWin = Number(selectPointsElement.value);
+export function pointsToWin(value) {
+	data.settings.pointsToWin = value;
 }
 
-export function decreaseDeltaInMs(selectMsAfterElement) {
-	data.settings.decreaseDeltaInMs = Number(selectMsAfterElement.value);
+export function decreaseDeltaInMs(value) {
+	data.settings.decreaseDeltaInMs = value;
 }
 
-export function maximumMisses(selectMaxMissesElement) {
-	data.settings.maximumMisses = Number(selectMaxMissesElement.value);
+export function maximumMisses(value) {
+	data.settings.maximumMisses = value;
 }
 
-export function isMuted(SwitchSettingElement) {
-	if (SwitchSettingElement.checked) {
+export function isMuted(checkbox) {
+	if (checkbox.checked) {
 		data.settings.isMuted = true;
 	} else {
 		data.settings.isMuted = false;
@@ -160,16 +160,11 @@ function getRandom(N) {
 	return Math.floor(Math.random() * (N + 1));
 }
 
-// очищаем счетчик
-export function clearScores() {
-	data.score.caughtCount = 0;
-	data.score.missCount = 0;
-}
-
 let gameTimerId;
 
 // таймер игры
 export function GameTimer() {
+	//data.startDAte = new Date();
 	if (data.appStatus === APP_STATUSES.game) {
 		gameTimerId = setInterval(() => {
 			finalCardData.seconds++;
@@ -186,6 +181,12 @@ export function GameTimer() {
 export function stopOffer() {
 	clearInterval(stepIntervalId);
 	clearInterval(gameTimerId);
+}
+
+// очищаем счетчик
+export function clearScores() {
+	data.score.caughtCount = 0;
+	data.score.missCount = 0;
 }
 
 // изменение данных FinalCard
