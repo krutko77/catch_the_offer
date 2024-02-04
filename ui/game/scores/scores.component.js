@@ -1,5 +1,6 @@
-import { data, subscribe, stopOffer, changeAppStatus, APP_STATUSES, changeDataFinalCard } from "../../../data/game.data.js";
+import { data, subscribe, stopOffer, changeAppStatus, APP_STATUSES, changeFinalStatus } from "../../../data/game.data.js";
 import { renderApp } from "../../../main.js";
+import { fillDetailsFinalCard } from "../../renderFinalGame/renderFinalGame.component.js";
 
 export function Scores() {
 
@@ -34,7 +35,8 @@ function update(containerElement) {
 function stopGame(caughtCount, missCount) {
 	if (caughtCount === data.settings.pointsToWin || missCount === data.settings.maximumMisses) {
 		stopOffer();
-		changeDataFinalCard(caughtCount, missCount);
+		changeFinalStatus(caughtCount, missCount);
+		fillDetailsFinalCard();
 		changeAppStatus(APP_STATUSES.final, renderApp);
 	}
 }

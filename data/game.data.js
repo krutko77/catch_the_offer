@@ -12,6 +12,13 @@ export const OFFER_STATUSES = {
 	caught: 'caught'
 }
 
+// статусы финала
+export const FINAL_STATUSES = {
+	default: 'default',
+	victory: 'victory',
+	loss: 'loss'
+}
+
 // общие данные
 export const data = {
 	settings: {
@@ -24,6 +31,7 @@ export const data = {
 	},
 	appStatus: APP_STATUSES.start,
 	offerStatus: OFFER_STATUSES.default,
+	finalStatus: FINAL_STATUSES.default,
 	coords: {
 		current: {
 			x: 1,
@@ -37,18 +45,11 @@ export const data = {
 	score: {
 		missCount: 0,
 		caughtCount: 0
+	},
+	gameDuration: {
+		seconds: 0,
+		minutes: 0
 	}
-}
-
-// данные для finalCardData 
-export const finalCardData = {
-	title: 'You Win!',
-	label: 'Congratulations',
-	sumCatch: 0,
-	sumMiss: 0,
-	minutes: 0,
-	seconds: 0,
-	iconSrc: 'assets/images/yuo-win-icon.svg'
 }
 
 let subscribers = [] // массив подписчиков
@@ -64,7 +65,7 @@ export function subscribe(newSubscriber) {
 
 // изменение данных data через настройки
 export function gridDimensions(value) {
-	data.settings.rowsCount = value;	
+	data.settings.rowsCount = value;
 	data.settings.columnsCount = value;
 }
 
@@ -156,31 +157,49 @@ export function catchOffer() {
 	runStepInterval();
 }
 
+// вычисляем рандомное число
 function getRandom(N) {
 	return Math.floor(Math.random() * (N + 1));
 }
 
-let gameTimerId;
+// Создаем объекты Date для начала и конца игры
+let startTime = null;
+let endTime = null;
 
-// таймер игры
-export function GameTimer() {
-	//data.startDAte = new Date();
+// Функция для запуска таймера при начале игры
+export function startTimer() {
 	if (data.appStatus === APP_STATUSES.game) {
-		gameTimerId = setInterval(() => {
-			finalCardData.seconds++;
-		}, 1000);
-
-		if (finalCardData.seconds >= 60) {
-			finalCardData.minutes++;
-			finalCardData.seconds = 0;
-		}
+		// Запоминаем время начала игры
+		startTime = new Date();
 	}
 }
 
-// оставка перемещений оффера и таймера
+// Функция для остановки таймера при окончании игры
+function stopTimer() {
+	// Запоминаем время окончания игры
+	endTime = new Date();
+}
+
+// остановка перемещений оффера и таймера
 export function stopOffer() {
 	clearInterval(stepIntervalId);
-	clearInterval(gameTimerId);
+	stopTimer();
+	calculateTime();
+}
+
+// вычисляем время игры
+function calculateTime() {
+	// Вычисляем разницу между началом и окончанием игры в миллисекундах
+	if (startTime && endTime) {
+		const durationInMilliseconds = endTime - startTime;
+		// Преобразуем продолжительность в минуты и секунды
+		// Продолжительность в секундах
+		const durationInSeconds = Math.floor(durationInMilliseconds / 1000);
+		// Минуты
+		data.gameDuration.minutes = Math.floor(durationInSeconds / 60);
+		// Остаток секунд
+		data.gameDuration.seconds = durationInSeconds % 60;
+	}
 }
 
 // очищаем счетчик
@@ -189,21 +208,14 @@ export function clearScores() {
 	data.score.missCount = 0;
 }
 
-// изменение данных FinalCard
-export function changeDataFinalCard(caughtCount, missCount) {
+// изменение статуса финала
+export function changeFinalStatus(caughtCount, missCount) {
 	if (caughtCount === data.settings.pointsToWin) {
-		finalCardData.sumCatch = caughtCount;
-		finalCardData.sumMiss = missCount;
-		finalCardData.iconSrc = 'assets/images/yuo-win-icon.svg';
+		data.finalStatus = FINAL_STATUSES.victory;
 	}
 	if (missCount === data.settings.maximumMisses) {
-		finalCardData.title = 'You Lose!';
-		finalCardData.label = "You'll be lucky next time";
-		finalCardData.sumCatch = caughtCount,
-			finalCardData.sumMiss = missCount,
-			finalCardData.iconSrc = 'assets/images/yuo-lose-icon.svg'
+		data.finalStatus = FINAL_STATUSES.loss;
 	}
-
 }
 
 // приведерие всех настроек к начальному состоянию
@@ -218,8 +230,8 @@ export function resetSettings() {
 
 // обнуление таймера
 export function resetTimer() {
-	finalCardData.minutes = 0;
-	finalCardData.seconds = 0;
+	data.gameDuration.seconds = 0;
+	data.gameDuration.minutes = 0;
 }
 
 

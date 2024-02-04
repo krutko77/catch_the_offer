@@ -1,7 +1,8 @@
 import { renderApp } from '../../../main.js';
-import { APP_STATUSES, changeAppStatus, clearScores, finalCardData, resetSettings, resetTimer } from '../../../data/game.data.js';
+import { APP_STATUSES, changeAppStatus, clearScores, resetSettings, resetTimer } from '../../../data/game.data.js';
 import { CardImg } from './cardImg/cardImg.component.js';
 import { createElementWithClass } from '../../../helpers.js';
+import { finalCardData } from '../../../ui/renderFinalGame/renderFinalGame.component.js';
 
 export function FinalCard(finalData) {
 
